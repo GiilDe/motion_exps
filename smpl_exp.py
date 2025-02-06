@@ -209,8 +209,8 @@ with torch.enable_grad():
         # poses_grad = torch.autograd.grad(noised_latent_video_i, torch.stack(poses))
         # poses_grad = torch.matmul((noise_pred - epsilon), poses_grad)
 
-        poses_sds_loss = (noise_pred - epsilon) * latent_video_i
-        poses_sds_loss.backward()
+        poses_sds_loss: torch.Tensor = (noise_pred - epsilon) * latent_video_i
+        poses_sds_loss.mean().backward()
         optimizer.step()
         optimizer.zero_grad()
 
