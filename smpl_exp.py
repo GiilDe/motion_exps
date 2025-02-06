@@ -220,4 +220,5 @@ with torch.enable_grad():
             (image.squeeze(0).detach().cpu().numpy() * 255).astype(np.uint8)
             for image in frames_i
         ]
+        os.makedirs("results", exist_ok=True)
         export_to_video(video_np, f"results/res_{i}.mp4", fps=25)
